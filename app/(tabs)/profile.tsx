@@ -88,7 +88,7 @@ export default function ProfileScreen() {
         ))}
 
         {/* Sign Out */}
-        <Animated.View entering={FadeInDown.delay(700).duration(500)} style={{ marginBottom: 16 }}>
+        <Animated.View entering={FadeInDown.delay(700).duration(500)} style={{ marginBottom: 40 }}>
           <Pressable onPress={showUnderDevModal} style={({ pressed }) => ({ padding: 16, borderRadius: 16, backgroundColor: pressed ? "rgba(255,180,171,0.1)" : "transparent", borderWidth: 1, borderColor: "rgba(255,180,171,0.2)", alignItems: "center" })}>
             <Text style={{ fontFamily: "Manrope_600SemiBold", fontSize: 16, color: Colors.error }}>Sign Out</Text>
           </Pressable>

@@ -67,7 +67,7 @@ export default function HomeScreen() {
         {/* Active Stay Overview Card */}
         <Animated.View entering={FadeInDown.delay(200).duration(700)} style={{ marginBottom: 48 }}>
           <Pressable
-            onPress={showUnderDevModal}
+            onPress={() => router.push("/guest-experience")}
             style={({ pressed }) => ({
               width: "100%",
               aspectRatio: 4 / 5,
@@ -191,7 +191,7 @@ export default function HomeScreen() {
                       11:00 AM
                     </Text>
                   </View>
-                  <GoldButton title="Manage" icon="arrow-forward" onPress={showUnderDevModal} />
+                  <GoldButton title="Manage" icon="arrow-forward" onPress={() => router.push("/guest-experience")} />
                 </View>
               </View>
             </View>
@@ -280,7 +280,7 @@ export default function HomeScreen() {
           <View style={{ flexDirection: "row", gap: 8 }}>
             {/* Housekeeping */}
             <Pressable
-              onPress={showUnderDevModal}
+              onPress={() => router.push("/ai-concierge")}
               style={({ pressed }) => ({
                 flex: 1,
                 height: 128,
@@ -306,7 +306,7 @@ export default function HomeScreen() {
 
             {/* Transport */}
             <Pressable
-              onPress={showUnderDevModal}
+              onPress={() => router.push("/ai-concierge")}
               style={({ pressed }) => ({
                 flex: 1,
                 height: 128,
@@ -382,7 +382,7 @@ export default function HomeScreen() {
               key={card.id}
               entering={FadeInRight.delay(500 + index * 100).duration(500)}
             >
-              <ExperienceCard {...card} onPress={showUnderDevModal} />
+              <ExperienceCard {...card} onPress={() => router.push("/ai-concierge")} />
             </Animated.View>
           ))}
         </ScrollView>
