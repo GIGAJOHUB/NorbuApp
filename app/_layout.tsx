@@ -55,6 +55,8 @@ export default function RootLayout() {
       >
         <Stack.Screen name="index" />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="guest-experience" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="ai-concierge" options={{ animation: "slide_from_bottom" }} />
       </Stack>
       <StatusBar style="light" />
     </>
