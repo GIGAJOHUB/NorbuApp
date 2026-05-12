@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# Norbu Homes
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A premium luxury hospitality mobile application for **Norbu Homes**, a Dubai-based luxury holiday home and property management company.
 
-## Get started
+Built with **React Native**, **Expo SDK 54**, **NativeWind**, and **Reanimated** — targeting both iOS and Android.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- **Cinematic Splash Screen** — Animated gold logo with fade-out transition
+- **Home Dashboard** — Active stay overview, concierge quick actions, explore carousel
+- **Concierge Services** — Bento service cards + AI Concierge chat interface
+- **Explore Dubai** — Full-bleed hero, category bento grid, trending scroll
+- **Property Portfolio** — Featured listings, operations dashboard, owner insights
+- **Profile & Settings** — Member stats, preferences, account management
 
-   ```bash
-   npx expo start
-   ```
+## 🎨 Design Language
 
-In the output, you'll find options to open the app in a
+- **Theme:** Matte Black & Gold (Material Design 3 Dark)
+- **Typography:** Playfair Display (serif) + Manrope (sans-serif)
+- **Effects:** Glassmorphism, gradient overlays, blur headers
+- **Animations:** Reanimated entrance animations (FadeInDown, FadeInRight)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 🚀 Quick Start
 
 ```bash
-npm run reset-project
+# Install dependencies
+npm install
+
+# Start development server
+npx expo start --clear
+
+# Run on device
+npx expo start --android    # Android via Expo Go
+npx expo start --ios        # iOS via Expo Go (macOS only)
+npx expo start --web        # Web preview
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📦 Build
 
-## Learn more
+```bash
+# Login to EAS
+npx eas login
 
-To learn more about developing your project with Expo, look at the following resources:
+# Build Android APK (preview)
+npx eas build --platform android --profile preview
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+# Build Android AAB (production)
+npx eas build --platform android --profile production
 
-## Join the community
+# Build iOS (production)
+npx eas build --platform ios --profile production
+```
 
-Join our community of developers creating universal apps.
+## 📁 Project Structure
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+app/                    → Expo Router file-based routes
+  (tabs)/               → Bottom tab navigator (5 screens)
+components/
+  layout/               → Header, ScreenContainer
+  ui/                   → GlassPanel, GoldButton, StatusBadge, SectionHeader
+constants/              → colors, typography, spacing tokens
+```
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full reference.
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|-----------|---------|
+| Expo SDK 54 | Cross-platform framework |
+| Expo Router v6 | File-based navigation |
+| NativeWind v4 | Tailwind CSS for RN |
+| Reanimated v4 | 60fps animations |
+| expo-blur | Glassmorphism effects |
+| expo-linear-gradient | Gradient overlays |
+| expo-image | Optimised image loading |
+
+## 📄 License
+
+Proprietary — Norbu Homes © 2025. All rights reserved.
