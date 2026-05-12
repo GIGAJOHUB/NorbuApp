@@ -51,9 +51,11 @@
       "reactCompiler": true
     },
     "extra": {
+      "router": {},
       "eas": {
-        "projectId": "norbu-homes"
+        "projectId": "44dceb2c-fa59-47cf-b718-29db6f8851fd"
       }
-    }
+    },
+    "owner": "zohebnauman"
   }
 }
