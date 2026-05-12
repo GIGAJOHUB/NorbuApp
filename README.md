@@ -6,7 +6,7 @@ Built with **React Native**, **Expo SDK 54**, **NativeWind**, and **Reanimated**
 
 ---
 
-## ✨ Features
+## Features
 
 - **Cinematic Splash Screen** — Animated gold logo with fade-out transition
 - **Home Dashboard** — Active stay overview, concierge quick actions, explore carousel
@@ -15,14 +15,14 @@ Built with **React Native**, **Expo SDK 54**, **NativeWind**, and **Reanimated**
 - **Property Portfolio** — Featured listings, operations dashboard, owner insights
 - **Profile & Settings** — Member stats, preferences, account management
 
-## 🎨 Design Language
+## Design Language
 
 - **Theme:** Matte Black & Gold (Material Design 3 Dark)
 - **Typography:** Playfair Display (serif) + Manrope (sans-serif)
 - **Effects:** Glassmorphism, gradient overlays, blur headers
 - **Animations:** Reanimated entrance animations (FadeInDown, FadeInRight)
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -37,7 +37,7 @@ npx expo start --ios        # iOS via Expo Go (macOS only)
 npx expo start --web        # Web preview
 ```
 
-## 📦 Build
+## Build
 
 ```bash
 # Login to EAS
@@ -53,7 +53,7 @@ npx eas build --platform android --profile production
 npx eas build --platform ios --profile production
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 app/                    → Expo Router file-based routes
