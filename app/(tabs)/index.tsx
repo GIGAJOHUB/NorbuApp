@@ -1,5 +1,13 @@
-import React from "react";
-import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  ScrollView,
+  Dimensions,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
@@ -23,6 +31,9 @@ const CARD_WIDTH = 220;
  */
 export default function HomeScreen() {
   const router = useRouter();
+  const [showUnderDev, setShowUnderDev] = useState(false);
+
+  const showUnderDevModal = () => setShowUnderDev(true);
 
   return (
     <ScreenContainer>
@@ -56,14 +67,16 @@ export default function HomeScreen() {
         {/* Active Stay Overview Card */}
         <Animated.View entering={FadeInDown.delay(200).duration(700)} style={{ marginBottom: 48 }}>
           <Pressable
-            style={{
+            onPress={showUnderDevModal}
+            style={({ pressed }) => ({
               width: "100%",
               aspectRatio: 4 / 5,
               borderRadius: 16,
               overflow: "hidden",
               borderWidth: 1,
               borderColor: "rgba(255,255,255,0.05)",
-            }}
+              opacity: pressed ? 0.95 : 1,
+            })}
           >
             {/* Background Image */}
             <Image
@@ -178,7 +191,7 @@ export default function HomeScreen() {
                       11:00 AM
                     </Text>
                   </View>
-                  <GoldButton title="Manage" icon="arrow-forward" />
+                  <GoldButton title="Manage" icon="arrow-forward" onPress={showUnderDevModal} />
                 </View>
               </View>
             </View>
@@ -211,17 +224,27 @@ export default function HomeScreen() {
               borderWidth: 1,
               borderColor: "rgba(255,255,255,0.05)",
               marginBottom: 8,
+              flexDirection: "row",
+              alignItems: "flex-end",
             })}
           >
-            <View style={{ position: "absolute", top: 0, right: 0, padding: 16, opacity: 0.1 }}>
-              <MaterialIcons name="room-service" size={80} color={Colors.onSurface} />
-            </View>
+            {/* Decorative background icon */}
             <View
               style={{
                 position: "absolute",
-                bottom: 0,
-                left: 0,
+                top: 0,
                 right: 0,
+                padding: 16,
+                opacity: 0.1,
+              }}
+            >
+              <MaterialIcons name="room-service" size={80} color={Colors.onSurface} />
+            </View>
+
+            {/* Foreground content — flex-based to avoid overlap */}
+            <View
+              style={{
+                flex: 1,
                 padding: 24,
               }}
             >
@@ -257,6 +280,7 @@ export default function HomeScreen() {
           <View style={{ flexDirection: "row", gap: 8 }}>
             {/* Housekeeping */}
             <Pressable
+              onPress={showUnderDevModal}
               style={({ pressed }) => ({
                 flex: 1,
                 height: 128,
@@ -282,6 +306,7 @@ export default function HomeScreen() {
 
             {/* Transport */}
             <Pressable
+              onPress={showUnderDevModal}
               style={({ pressed }) => ({
                 flex: 1,
                 height: 128,
@@ -357,11 +382,81 @@ export default function HomeScreen() {
               key={card.id}
               entering={FadeInRight.delay(500 + index * 100).duration(500)}
             >
-              <ExperienceCard {...card} />
+              <ExperienceCard {...card} onPress={showUnderDevModal} />
             </Animated.View>
           ))}
         </ScrollView>
       </Animated.View>
+
+      {/* Under Development Modal */}
+      <Modal
+        visible={showUnderDev}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowUnderDev(false)}
+      >
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 32,
+          }}
+          onPress={() => setShowUnderDev(false)}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.surfaceContainerHigh,
+              borderRadius: 24,
+              padding: 32,
+              alignItems: "center",
+              maxWidth: 320,
+              width: "100%",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.1)",
+            }}
+          >
+            <View
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 32,
+                backgroundColor: "rgba(229, 196, 132, 0.15)",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 20,
+              }}
+            >
+              <MaterialIcons name="engineering" size={32} color={Colors.primary} />
+            </View>
+            <Text
+              style={{
+                fontFamily: "PlayfairDisplay_500Medium",
+                fontSize: 22,
+                color: Colors.onSurface,
+                marginBottom: 8,
+                textAlign: "center",
+              }}
+            >
+              Under Development
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Manrope_400Regular",
+                fontSize: 14,
+                lineHeight: 22,
+                color: Colors.onSurfaceVariant,
+                textAlign: "center",
+                marginBottom: 24,
+              }}
+            >
+              This feature is currently being crafted with care. Stay tuned for updates.
+            </Text>
+            <GoldButton title="Dismiss" onPress={() => setShowUnderDev(false)} fullWidth />
+          </View>
+        </Pressable>
+      </Modal>
     </ScreenContainer>
   );
 }
@@ -372,19 +467,22 @@ interface ExperienceCardData {
   category: string;
   title: string;
   imageUri: string;
+  onPress?: () => void;
 }
 
-function ExperienceCard({ category, title, imageUri }: ExperienceCardData) {
+function ExperienceCard({ category, title, imageUri, onPress }: ExperienceCardData) {
   return (
     <Pressable
-      style={{
+      onPress={onPress}
+      style={({ pressed }) => ({
         width: CARD_WIDTH,
         aspectRatio: 4 / 5,
         borderRadius: 16,
         overflow: "hidden",
         borderWidth: 1,
         borderColor: "rgba(255,255,255,0.05)",
-      }}
+        opacity: pressed ? 0.9 : 1,
+      })}
     >
       <Image
         source={{ uri: imageUri }}

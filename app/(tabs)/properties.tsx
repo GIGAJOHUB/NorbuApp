@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
+import { View, Text, Pressable, ScrollView, Dimensions, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
@@ -31,6 +31,9 @@ type TabKey = "featured" | "operations" | "insights";
 
 export default function PropertiesScreen() {
   const [tab, setTab] = useState<TabKey>("featured");
+  const [showUnderDev, setShowUnderDev] = useState(false);
+
+  const showUnderDevModal = () => setShowUnderDev(true);
 
   return (
     <ScreenContainer>
@@ -58,20 +61,90 @@ export default function PropertiesScreen() {
           </ScrollView>
         </Animated.View>
 
-        {tab === "featured" && <FeaturedTab />}
-        {tab === "operations" && <OperationsTab />}
-        {tab === "insights" && <InsightsTab />}
+        {tab === "featured" && <FeaturedTab onPress={showUnderDevModal} />}
+        {tab === "operations" && <OperationsTab onPress={showUnderDevModal} />}
+        {tab === "insights" && <InsightsTab onPress={showUnderDevModal} />}
       </View>
+
+      {/* Under Development Modal */}
+      <Modal
+        visible={showUnderDev}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowUnderDev(false)}
+      >
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 32,
+          }}
+          onPress={() => setShowUnderDev(false)}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.surfaceContainerHigh,
+              borderRadius: 24,
+              padding: 32,
+              alignItems: "center",
+              maxWidth: 320,
+              width: "100%",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.1)",
+            }}
+          >
+            <View
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 32,
+                backgroundColor: "rgba(229, 196, 132, 0.15)",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 20,
+              }}
+            >
+              <MaterialIcons name="engineering" size={32} color={Colors.primary} />
+            </View>
+            <Text
+              style={{
+                fontFamily: "PlayfairDisplay_500Medium",
+                fontSize: 22,
+                color: Colors.onSurface,
+                marginBottom: 8,
+                textAlign: "center",
+              }}
+            >
+              Under Development
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Manrope_400Regular",
+                fontSize: 14,
+                lineHeight: 22,
+                color: Colors.onSurfaceVariant,
+                textAlign: "center",
+                marginBottom: 24,
+              }}
+            >
+              This feature is currently being crafted with care. Stay tuned for updates.
+            </Text>
+            <GoldButton title="Dismiss" onPress={() => setShowUnderDev(false)} fullWidth />
+          </View>
+        </Pressable>
+      </Modal>
     </ScreenContainer>
   );
 }
 
-function FeaturedTab() {
+function FeaturedTab({ onPress }: { onPress: () => void }) {
   return (
     <View style={{ gap: 24 }}>
       {PROPERTIES.map((p, i) => (
         <Animated.View key={p.id} entering={FadeInDown.delay(200 + i * 100).duration(600)}>
-          <Pressable style={{ width: "100%", aspectRatio: 4 / 5, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
+          <Pressable onPress={onPress} style={({pressed}) => ({ width: "100%", aspectRatio: 4 / 5, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", opacity: pressed ? 0.9 : 1 })}>
             <Image source={{ uri: p.image }} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} contentFit="cover" />
             <LinearGradient colors={["transparent", "rgba(11,11,13,0.4)", "#0B0B0D"]} locations={[0, 0.5, 1]} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} />
             <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 24 }}>
@@ -106,12 +179,12 @@ function DetailChip({ icon, text }: { icon: string; text: string }) {
   );
 }
 
-function OperationsTab() {
+function OperationsTab({ onPress }: { onPress: () => void }) {
   return (
     <View style={{ gap: 24 }}>
       {/* Revenue + Occupancy */}
       <Animated.View entering={FadeInDown.delay(200).duration(600)}>
-        <View style={{ backgroundColor: Colors.surfaceContainer, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
+        <Pressable onPress={onPress} style={({pressed}) => ({ backgroundColor: Colors.surfaceContainer, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", opacity: pressed ? 0.9 : 1 })}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 4 }}>
             <MaterialIcons name="account-balance-wallet" size={16} color={Colors.outline} />
             <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.outline, textTransform: "uppercase" }}>Total Revenue</Text>
@@ -127,12 +200,12 @@ function OperationsTab() {
               <View key={i} style={{ flex: 1, height: `${h}%`, backgroundColor: i === 5 ? "rgba(229,196,132,0.3)" : Colors.surface, borderTopLeftRadius: 2, borderTopRightRadius: 2, borderWidth: 1, borderColor: i === 5 ? "rgba(229,196,132,0.3)" : "rgba(255,255,255,0.05)" }} />
             ))}
           </View>
-        </View>
+        </Pressable>
       </Animated.View>
 
       {/* Occupancy Ring */}
       <Animated.View entering={FadeInDown.delay(300).duration(600)}>
-        <View style={{ backgroundColor: Colors.surfaceContainer, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", alignItems: "center" }}>
+        <Pressable onPress={onPress} style={({pressed}) => ({ backgroundColor: Colors.surfaceContainer, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", alignItems: "center", opacity: pressed ? 0.9 : 1 })}>
           <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.outline, textTransform: "uppercase", alignSelf: "flex-start", marginBottom: 16 }}>OCCUPANCY</Text>
           <View style={{ width: 120, height: 120, borderRadius: 60, borderWidth: 4, borderColor: Colors.primary, alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
             <Text style={{ fontFamily: "PlayfairDisplay_600SemiBold", fontSize: 32, color: Colors.onSurface }}>84<Text style={{ fontSize: 18, color: Colors.outline }}>%</Text></Text>
@@ -147,17 +220,19 @@ function OperationsTab() {
               <Text style={{ fontFamily: "Manrope_600SemiBold", fontSize: 20, color: Colors.onSurface }}>8</Text>
             </View>
           </View>
-        </View>
+        </Pressable>
       </Animated.View>
 
       {/* Cleaning Status */}
       <Animated.View entering={FadeInDown.delay(400).duration(600)}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255,0.05)", paddingBottom: 12, marginBottom: 16 }}>
           <Text style={{ fontFamily: "Manrope_600SemiBold", fontSize: 20, color: Colors.onSurface }}>Live Cleaning Status</Text>
-          <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.primary }}>VIEW ALL</Text>
+          <Pressable onPress={onPress}>
+            <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.primary }}>VIEW ALL</Text>
+          </Pressable>
         </View>
         {CLEANING.map((c) => (
-          <View key={c.id} style={{ backgroundColor: Colors.surfaceContainerHigh, borderRadius: 12, padding: 16, flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+          <Pressable onPress={onPress} key={c.id} style={({pressed}) => ({ backgroundColor: pressed ? Colors.surfaceContainer : Colors.surfaceContainerHigh, borderRadius: 12, padding: 16, flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 12 })}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 12, flex: 1 }}>
               <View style={{ width: 48, height: 48, borderRadius: 8, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
                 <Image source={{ uri: c.image }} style={{ width: 48, height: 48 }} contentFit="cover" />
@@ -171,14 +246,14 @@ function OperationsTab() {
               <StatusBadge label={c.status} variant={c.status === "In Progress" ? "active" : "pending"} />
               <MaterialIcons name="chevron-right" size={20} color={Colors.outline} />
             </View>
-          </View>
+          </Pressable>
         ))}
       </Animated.View>
     </View>
   );
 }
 
-function InsightsTab() {
+function InsightsTab({ onPress }: { onPress: () => void }) {
   return (
     <View style={{ gap: 16 }}>
       <Animated.View entering={FadeInDown.delay(100).duration(600)} style={{ alignItems: "center", marginBottom: 16 }}>
@@ -189,7 +264,7 @@ function InsightsTab() {
       {/* KPI Cards */}
       {KPIS.map((kpi, i) => (
         <Animated.View key={kpi.label} entering={FadeInDown.delay(200 + i * 100).duration(600)}>
-          <View style={{ backgroundColor: Colors.surfaceContainerLow, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
+          <Pressable onPress={onPress} style={({pressed}) => ({ backgroundColor: Colors.surfaceContainerLow, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", opacity: pressed ? 0.8 : 1 })}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 12 }}>
               <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.onSurfaceVariant, textTransform: "uppercase" }}>{kpi.label}</Text>
               <MaterialIcons name={kpi.icon as any} size={22} color="rgba(229,196,132,0.7)" />
@@ -199,13 +274,13 @@ function InsightsTab() {
               <MaterialIcons name={kpi.flat ? "trending-flat" : "trending-up"} size={16} color={kpi.flat ? Colors.outline : Colors.primary} />
               <Text style={{ fontFamily: "Manrope_400Regular", fontSize: 14, color: kpi.flat ? Colors.onSurfaceVariant : Colors.primary }}>{kpi.trend}{!kpi.flat ? " vs last month" : " with last month"}</Text>
             </View>
-          </View>
+          </Pressable>
         </Animated.View>
       ))}
 
       {/* Top Performer */}
       <Animated.View entering={FadeInDown.delay(600).duration(600)}>
-        <Pressable style={{ width: "100%", height: 340, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
+        <Pressable onPress={onPress} style={({pressed}) => ({ width: "100%", height: 340, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)", opacity: pressed ? 0.9 : 1 })}>
           <Image source={{ uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuBzQ-jhud8_iyfARsqfkCUytMcsD3J1uda52xbiKRi-1YHnft7gXv3P0mlhiO0V3jCVmBuNqpu7nkQPGoZXPIRo3BQwSUnENXeT8bYXDTlLjPSiVgmQeUDhfibsJ-3TjGghG0lyKA_UvWbOYjCrzlAefr2PQWVhpKN3wT6v8yCBWOprkiveWoqkTVeWBug7WfUaftTzcume13Bnjo3y8jdTDV1hFutM07SOwDasbSAdUR9co8ru3_mGJ0rcu9eeZ6qP0QRBN67Zvq0" }} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: 0.6 }} contentFit="cover" />
           <LinearGradient colors={["transparent", "rgba(0,0,0,0.4)", "rgba(0,0,0,0.95)"]} locations={[0, 0.4, 1]} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} />
           <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 24 }}>

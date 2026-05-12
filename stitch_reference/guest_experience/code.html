@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guest Experience - NORBU</title>
+<!-- Google Fonts: Playfair Display & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Playfair+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#e3c282",
+                      "primary-fixed": "#ffdea0",
+                      "surface-container-high": "#2d2925",
+                      "on-tertiary": "#222f53",
+                      "tertiary-container": "#9facd7",
+                      "surface-dim": "#16130f",
+                      "surface-container": "#221f1b",
+                      "primary-fixed-dim": "#e3c282",
+                      "tertiary-fixed": "#dae1ff",
+                      "on-error": "#690005",
+                      "secondary-fixed": "#ffdea4",
+                      "on-secondary-fixed-variant": "#5c4308",
+                      "surface": "#16130f",
+                      "tertiary": "#bac7f4",
+                      "primary-container": "#c8a96b",
+                      "on-tertiary-container": "#334064",
+                      "inverse-on-surface": "#33302b",
+                      "outline-variant": "#4d463a",
+                      "on-secondary": "#412d00",
+                      "background": "#16130f",
+                      "secondary": "#e7c17c",
+                      "inverse-surface": "#e9e1da",
+                      "error-container": "#93000a",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#38342f",
+                      "on-surface": "#e9e1da",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#b8c5f2",
+                      "on-surface-variant": "#d0c5b5",
+                      "surface-container-highest": "#38342f",
+                      "on-primary-fixed-variant": "#5a430f",
+                      "secondary-container": "#5c4308",
+                      "surface-container-lowest": "#100e0a",
+                      "on-primary-container": "#533d09",
+                      "on-secondary-fixed": "#261900",
+                      "outline": "#998f81",
+                      "surface-container-low": "#1e1b17",
+                      "secondary-fixed-dim": "#e7c17c",
+                      "on-background": "#e9e1da",
+                      "inverse-primary": "#735b25",
+                      "primary": "#e5c484",
+                      "on-primary": "#402d00",
+                      "on-primary-fixed": "#261a00",
+                      "on-tertiary-fixed": "#0b1a3d",
+                      "on-secondary-container": "#d4b06d",
+                      "on-tertiary-fixed-variant": "#39466b",
+                      "surface-bright": "#3c3933"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-gap-lg": "32px",
+                      "container-margin": "24px",
+                      "stack-gap-md": "16px",
+                      "stack-gap-sm": "8px",
+                      "section-padding": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Playfair Display"],
+                      "body-md": ["Manrope"],
+                      "title-lg": ["Manrope"],
+                      "display-lg": ["Playfair Display"],
+                      "headline-lg": ["Playfair Display"],
+                      "body-lg": ["Manrope"],
+                      "label-caps": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "title-lg": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "display-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-family: 'Material Symbols Outlined';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 24px;  /* Preferred icon size */
+          display: inline-block;
+          line-height: 1;
+          text-transform: none;
+          letter-spacing: normal;
+          word-wrap: normal;
+          white-space: nowrap;
+          direction: ltr;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(34, 31, 27, 0.6); /* surface-container with opacity */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/5 scale-95 duration-200">
+<button aria-label="Menu" class="flex items-center justify-center text-primary dark:text-primary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md tracking-widest text-primary dark:text-primary">NORBU</h1>
+<div aria-label="Guest profile avatar" class="w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl0AXPqOsyl3fxvSAHfSgQrs54epJCNbMD4qvGHxN0zjtE3U1ynNiUf03TkJFiQdbeTLyz3npcKutGM2h9qag8woQq2zzW1oLinw8LuymnMQYUHW8L0566NkxgYUJaRkIgzKifvsatnN_DXK7NutPqoKwYKa671U8uZkvn6EBkTXqerNxga80IEY_sXpl6xMf-DrBh8fLeF-CBnWf2X4ygXqEFITRBJiJgA3u2JM97isfbf-fvgFJhVl6m9co-pmQEKgkBAe0kB-w"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-32 px-container-margin md:px-section-padding max-w-4xl mx-auto space-y-section-padding">
+<!-- Hero Section -->
+<section class="relative w-full h-[442px] min-h-[400px] rounded-xl overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.4)]">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A stunning ultra-luxury penthouse living room in Dubai at dusk, featuring floor-to-ceiling windows overlooking the illuminated city skyline. The interior boasts minimalist, high-end Italian furniture in dark charcoal and soft beige tones. Cinematic, moody lighting with a warm ambient glow contrasting against the cool twilight outside. The overall aesthetic is 'quiet luxury', sophisticated, and expansive." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYF5EVdvAQRi2r-B8WvCoRkEhddSzZ7aknJCj12XqFMvae60xiMw3Wj2jsJNB_LCDCcMWNsPAAUi5dxwobaYSccOOI2ZeyXIQ3xxOJRsJNgP86_p55Sr8wyMFp1Di7dC7zqiQVvffpdxoJM9HZlkj5QhiR_pU0d9JapT1fX-MJu1dp8_4ib0tFe7ZD5fRwQp8oGYfWgDPnOqQV0PN0Z1sUdn2HnrbpSTZiapasdoHEQi6mnxN3PYkY4zTc4j7JAA5iJjhyW4bvXsU');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-container-margin flex flex-col justify-end">
+<span class="font-label-caps text-label-caps text-primary mb-2 uppercase tracking-widest">Active Stay</span>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-1">The Royal Atlantis</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                    Palm Jumeirah, Dubai
+                </p>
+</div>
+</section>
+<!-- Bento Grid: Essential Details -->
+<section class="space-y-stack-gap-md">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-stack-gap-md">Essential Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-gap-md">
+<!-- Smart Lock -->
+<div class="glass-panel rounded-xl p-container-margin flex flex-col justify-between group hover:bg-surface-container/80 transition-colors">
+<div class="flex justify-between items-start mb-6">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="lock">lock</span>
+</div>
+<span class="px-2 py-1 bg-primary/10 text-primary font-label-caps text-label-caps rounded">Active</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Smart Access</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Tap to unlock via Bluetooth or use your temporary PIN.</p>
+<button class="w-full py-3 bg-primary text-on-primary font-body-md text-body-md font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                            Reveal PIN
+                        </button>
+</div>
+</div>
+<!-- WiFi -->
+<div class="glass-panel rounded-xl p-container-margin flex flex-col justify-between group hover:bg-surface-container/80 transition-colors">
+<div class="mb-6">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="wifi">wifi</span>
+</div>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">High-Speed Wi-Fi</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Network: <strong class="text-on-surface">NORBU_Atlantis_5G</strong></p>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-white/5">
+<span class="font-body-md text-body-md tracking-widest text-on-surface">••••••••</span>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Check-in/Out -->
+<div class="glass-panel rounded-xl p-container-margin flex flex-col justify-between">
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="login">login</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Check-in</p>
+<p class="font-title-lg text-title-lg text-on-surface">3:00 PM</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Oct 12, 2023</p>
+</div>
+</div>
+<div class="h-px w-full bg-white/5"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-outline mt-1" data-icon="logout">logout</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Check-out</p>
+<p class="font-title-lg text-title-lg text-on-surface">11:00 AM</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Oct 18, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Building & Amenities (Glassmorphic Focus) -->
+<section>
+<div class="flex justify-between items-end mb-stack-gap-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Residence Amenities</h3>
+<button class="text-primary font-body-md text-body-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Amenity 1 -->
+<div class="relative overflow-hidden rounded-xl h-48 group cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A pristine, minimalist infinity pool on a high-rise terrace in Dubai at dusk. The water is perfectly still, reflecting the warm amber tones of the setting sun and the modern, geometric architectural lines of the building. The mood is tranquil, exclusive, and breathtakingly luxurious." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4Ikxe5g2Qoo80cVtSKVRiuuAVDzC1z2y4C8YwRAUCPwHCQthXDGRq4O-qAAbMIobS6rQflYkTahgYeN7MwPdLorUffFKO9zBEfdMtK8bfvoIR-cIyxBDgX8Jrosx1GxCMolyn9IuaLgGJut8PM-8w8LAZBENk4t49jkq_OiyXSBI5vPWIOGPw85naXbXlnTj6r51MiasV-GBSkOjBDSiEU5wdqEl3AYtLgmbXJfnL_85LPbSlMXI7Fg72VuzgwFD1UGOy0t9vcMY');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-4 glass-panel border-t border-white/10 flex items-center justify-between translate-y-2 group-hover:translate-y-0 transition-transform">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Infinity Pool</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Level 42 • 6AM - 10PM</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="pool">pool</span>
+</div>
+</div>
+</div>
+<!-- Amenity 2 -->
+<div class="relative overflow-hidden rounded-xl h-48 group cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A state-of-the-art, high-end private gymnasium with matte black equipment and soft, cinematic spot lighting. Large floor-to-ceiling windows reveal a dark, moody cityscape outside. The space feels immaculate, focused, and intensely premium, embodying a 'quiet luxury' aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBiajUwHLSDH-040sT7k4QWgzxMbo0qLCPf0MRG4BqJChHGJqz5k400gnDDHDOKEWMHk9OMLOBRBFbBUuKvEmfe_Ik0hSDX6QQrc74eY1XypkILpYW7E4K04lcK5bLnxi017-yIZ9o0K6hp-1sV-uqmaH_G7LAs_AIDYN9qZKyihUt4fnIeW_g5R--Odcw3LU6olAP4AOzap_YGGzHs7qGaEgio34MwKLPmrnPX7efYQ5QIdf01c5jE9YgXyiLcvoBJvdoo6MrofIo');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-4 glass-panel border-t border-white/10 flex items-center justify-between translate-y-2 group-hover:translate-y-0 transition-transform">
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Wellness Center</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Level 41 • 24/7 Access</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="fitness_center">fitness_center</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Concierge Support CTA -->
+<section>
+<div class="glass-panel rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border-primary/20 relative overflow-hidden">
+<!-- Subtle gradient glow in background -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" data-icon="room_service" data-weight="fill" style="font-variation-settings: 'FILL' 1;">room_service</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Dedicated Concierge</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Your personal attaché is available 24/7 to assist with dining reservations, transportation, or special requests.</p>
+</div>
+</div>
+<button class="w-full md:w-auto px-8 py-4 border border-primary text-primary font-body-md text-body-md font-semibold rounded-lg hover:bg-primary hover:text-on-primary transition-all whitespace-nowrap relative z-10">
+                    Request Service
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON -->
+<!-- Displayed on mobile, hidden on larger screens as per general rules -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface/90 dark:bg-surface/90 backdrop-blur-3xl border-t border-white/5 shadow-[0px_-10px_40px_rgba(0,0,0,0.4)] md:hidden">
+<!-- Inactive: Home -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home_work">home_work</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<!-- Active: Concierge (Semantic match for "Guest Experience / Support") -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="room_service" data-weight="fill" style="font-variation-settings: 'FILL' 1;">room_service</span>
+<span class="font-label-caps text-label-caps">Concierge</span>
+</a>
+<!-- Inactive: Explore -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps">Explore</span>
+</a>
+<!-- Inactive: Properties -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="location_city">location_city</span>
+<span class="font-label-caps text-label-caps">Properties</span>
+</a>
+<!-- Inactive: Profile -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>

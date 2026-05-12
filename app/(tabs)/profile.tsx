@@ -1,10 +1,10 @@
-import React from "react";
-import { View, Text, Pressable, Switch } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Pressable, Switch, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
+import { GoldButton } from "@/components/ui/GoldButton";
 import { Colors } from "@/constants/colors";
 
 const MENU_SECTIONS = [
@@ -36,6 +36,9 @@ const MENU_SECTIONS = [
 ];
 
 export default function ProfileScreen() {
+  const [showUnderDev, setShowUnderDev] = useState(false);
+  const showUnderDevModal = () => setShowUnderDev(true);
+
   return (
     <ScreenContainer>
       <View style={{ paddingHorizontal: 24 }}>
@@ -72,7 +75,7 @@ export default function ProfileScreen() {
             <Text style={{ fontFamily: "Manrope_700Bold", fontSize: 12, letterSpacing: 1.2, color: Colors.onSurfaceVariant, textTransform: "uppercase", marginBottom: 12 }}>{section.title}</Text>
             <View style={{ backgroundColor: Colors.surfaceContainer, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: "rgba(255,255,255,0.05)" }}>
               {section.items.map((item, ii) => (
-                <Pressable key={item.label} style={({ pressed }) => ({ flexDirection: "row", alignItems: "center", padding: 16, backgroundColor: pressed ? Colors.surfaceContainerHigh : "transparent", borderBottomWidth: ii < section.items.length - 1 ? 1 : 0, borderBottomColor: "rgba(255,255,255,0.05)" })}>
+                <Pressable onPress={item.toggle ? undefined : showUnderDevModal} key={item.label} style={({ pressed }) => ({ flexDirection: "row", alignItems: "center", padding: 16, backgroundColor: pressed ? Colors.surfaceContainerHigh : "transparent", borderBottomWidth: ii < section.items.length - 1 ? 1 : 0, borderBottomColor: "rgba(255,255,255,0.05)" })}>
                   <MaterialIcons name={item.icon as any} size={22} color={Colors.onSurfaceVariant} style={{ marginRight: 16 }} />
                   <Text style={{ flex: 1, fontFamily: "Manrope_400Regular", fontSize: 16, color: Colors.onSurface }}>{item.label}</Text>
                   {item.value && <Text style={{ fontFamily: "Manrope_400Regular", fontSize: 14, color: Colors.onSurfaceVariant, marginRight: 8 }}>{item.value}</Text>}
@@ -86,13 +89,83 @@ export default function ProfileScreen() {
 
         {/* Sign Out */}
         <Animated.View entering={FadeInDown.delay(700).duration(500)} style={{ marginBottom: 16 }}>
-          <Pressable style={({ pressed }) => ({ padding: 16, borderRadius: 16, backgroundColor: pressed ? "rgba(255,180,171,0.1)" : "transparent", borderWidth: 1, borderColor: "rgba(255,180,171,0.2)", alignItems: "center" })}>
+          <Pressable onPress={showUnderDevModal} style={({ pressed }) => ({ padding: 16, borderRadius: 16, backgroundColor: pressed ? "rgba(255,180,171,0.1)" : "transparent", borderWidth: 1, borderColor: "rgba(255,180,171,0.2)", alignItems: "center" })}>
             <Text style={{ fontFamily: "Manrope_600SemiBold", fontSize: 16, color: Colors.error }}>Sign Out</Text>
           </Pressable>
         </Animated.View>
 
         <Text style={{ fontFamily: "Manrope_400Regular", fontSize: 12, color: Colors.outline, textAlign: "center", marginBottom: 16 }}>Norbu Homes v1.0.0</Text>
       </View>
+
+      {/* Under Development Modal */}
+      <Modal
+        visible={showUnderDev}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowUnderDev(false)}
+      >
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 32,
+          }}
+          onPress={() => setShowUnderDev(false)}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.surfaceContainerHigh,
+              borderRadius: 24,
+              padding: 32,
+              alignItems: "center",
+              maxWidth: 320,
+              width: "100%",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.1)",
+            }}
+          >
+            <View
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 32,
+                backgroundColor: "rgba(229, 196, 132, 0.15)",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 20,
+              }}
+            >
+              <MaterialIcons name="engineering" size={32} color={Colors.primary} />
+            </View>
+            <Text
+              style={{
+                fontFamily: "PlayfairDisplay_500Medium",
+                fontSize: 22,
+                color: Colors.onSurface,
+                marginBottom: 8,
+                textAlign: "center",
+              }}
+            >
+              Under Development
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Manrope_400Regular",
+                fontSize: 14,
+                lineHeight: 22,
+                color: Colors.onSurfaceVariant,
+                textAlign: "center",
+                marginBottom: 24,
+              }}
+            >
+              This feature is currently being crafted with care. Stay tuned for updates.
+            </Text>
+            <GoldButton title="Dismiss" onPress={() => setShowUnderDev(false)} fullWidth />
+          </View>
+        </Pressable>
+      </Modal>
     </ScreenContainer>
   );
 }

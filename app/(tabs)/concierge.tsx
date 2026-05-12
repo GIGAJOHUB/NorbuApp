@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Dimensions,
+  Modal,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -83,39 +84,9 @@ interface ChatMessage {
 
 const INITIAL_MESSAGES: ChatMessage[] = [
   {
-    id: "1",
-    text: "Good evening. I have reviewed your itinerary. Would you like me to finalize the yacht charter for tomorrow afternoon? I can also arrange for catering on board.",
+    id: "welcome",
+    text: "Welcome to Norbu Homes AI Concierge. I'm here to help you with anything during your stay — dining reservations, transportation, housekeeping, and more. How may I assist you today?",
     isUser: false,
-  },
-  {
-    id: "2",
-    text: "Yes, please. Ensure they have the vintage champagne we discussed, and arrange transport from the residence at 2 PM sharp.",
-    isUser: true,
-    timestamp: "Just now",
-  },
-];
-
-// Suggested prompts
-const SUGGESTED_PROMPTS = [
-  {
-    icon: "restaurant",
-    title: "Best restaurants near Burj Khalifa?",
-    subtitle: "Discover Michelin-starred dining options.",
-  },
-  {
-    icon: "local-taxi",
-    title: "Book airport pickup",
-    subtitle: "Arrange a premium fleet transfer.",
-  },
-  {
-    icon: "spa",
-    title: "Schedule a spa treatment",
-    subtitle: "In-residence or partner wellness centers.",
-  },
-  {
-    icon: "event-seat",
-    title: "Exclusive event access",
-    subtitle: "Secure VIP tickets to upcoming galas.",
   },
 ];
 
@@ -123,34 +94,45 @@ export default function ConciergeScreen() {
   const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
   const [inputText, setInputText] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [showUnderDev, setShowUnderDev] = useState(false);
   const insets = useSafeAreaInsets();
 
-  const sendMessage = () => {
+  const sendMessage = useCallback(() => {
     if (!inputText.trim()) return;
-    const newMsg: ChatMessage = {
+    const userMsg: ChatMessage = {
       id: Date.now().toString(),
-      text: inputText,
+      text: inputText.trim(),
       isUser: true,
       timestamp: "Just now",
     };
-    setMessages((prev) => [...prev, newMsg]);
+    setMessages((prev) => [...prev, userMsg]);
     setInputText("");
 
-    // Simulate AI response
+    // AI auto-reply: under development
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          text: "Certainly. I'll arrange that immediately. You'll receive a confirmation within the next few minutes.",
+          text: "Thank you for your message. The Norbu Homes app is currently under development. Our full AI concierge service will be available soon. In the meantime, please contact our front desk for any immediate assistance.",
           isUser: false,
         },
       ]);
-    }, 1500);
-  };
+    }, 1200);
+  }, [inputText]);
+
+  const showUnderDevModal = () => setShowUnderDev(true);
 
   if (showChat) {
-    return <ChatView messages={messages} inputText={inputText} setInputText={setInputText} sendMessage={sendMessage} onBack={() => setShowChat(false)} />;
+    return (
+      <ChatView
+        messages={messages}
+        inputText={inputText}
+        setInputText={setInputText}
+        sendMessage={sendMessage}
+        onBack={() => setShowChat(false)}
+      />
+    );
   }
 
   return (
@@ -202,7 +184,7 @@ export default function ConciergeScreen() {
             entering={FadeInDown.delay(200 + index * 100).duration(600)}
             style={{ marginBottom: 16 }}
           >
-            <ServiceCard data={service} />
+            <ServiceCard data={service} onPress={showUnderDevModal} />
           </Animated.View>
         ))}
 
@@ -210,12 +192,13 @@ export default function ConciergeScreen() {
         <Animated.View entering={FadeInDown.delay(600).duration(600)} style={{ marginTop: 16, marginBottom: 16 }}>
           <Pressable
             onPress={() => setShowChat(true)}
-            style={{
+            style={({ pressed }) => ({
               borderRadius: 16,
               overflow: "hidden",
               borderWidth: 1,
-              borderColor: "rgba(229, 196, 132, 0.2)",
-            }}
+              borderColor: pressed ? "rgba(229, 196, 132, 0.4)" : "rgba(229, 196, 132, 0.2)",
+              opacity: pressed ? 0.95 : 1,
+            })}
           >
             <BlurView intensity={30} tint="dark" style={{ padding: 24 }}>
               {/* Glow effect */}
@@ -268,28 +251,107 @@ export default function ConciergeScreen() {
                 </View>
               </View>
               <View style={{ marginTop: 16 }}>
-                <GoldButton title="Start Conversation" variant="outlined" fullWidth />
+                <GoldButton title="Start Conversation" variant="outlined" fullWidth onPress={() => setShowChat(true)} />
               </View>
             </BlurView>
           </Pressable>
         </Animated.View>
       </View>
+
+      {/* Under Development Modal */}
+      <UnderDevModal visible={showUnderDev} onClose={() => setShowUnderDev(false)} />
     </ScreenContainer>
   );
 }
 
+/* Under Development Modal (shared) */
+function UnderDevModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+    >
+      <Pressable
+        style={{
+          flex: 1,
+          backgroundColor: "rgba(0,0,0,0.7)",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 32,
+        }}
+        onPress={onClose}
+      >
+        <View
+          style={{
+            backgroundColor: Colors.surfaceContainerHigh,
+            borderRadius: 24,
+            padding: 32,
+            alignItems: "center",
+            maxWidth: 320,
+            width: "100%",
+            borderWidth: 1,
+            borderColor: "rgba(255,255,255,0.1)",
+          }}
+        >
+          <View
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 32,
+              backgroundColor: "rgba(229, 196, 132, 0.15)",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+          >
+            <MaterialIcons name="engineering" size={32} color={Colors.primary} />
+          </View>
+          <Text
+            style={{
+              fontFamily: "PlayfairDisplay_500Medium",
+              fontSize: 22,
+              color: Colors.onSurface,
+              marginBottom: 8,
+              textAlign: "center",
+            }}
+          >
+            Under Development
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Manrope_400Regular",
+              fontSize: 14,
+              lineHeight: 22,
+              color: Colors.onSurfaceVariant,
+              textAlign: "center",
+              marginBottom: 24,
+            }}
+          >
+            This feature is currently being crafted with care. Stay tuned for updates.
+          </Text>
+          <GoldButton title="Dismiss" onPress={onClose} fullWidth />
+        </View>
+      </Pressable>
+    </Modal>
+  );
+}
+
 /* Service Card */
-function ServiceCard({ data }: { data: ServiceCardData }) {
+function ServiceCard({ data, onPress }: { data: ServiceCardData; onPress?: () => void }) {
   return (
     <Pressable
-      style={{
+      onPress={onPress}
+      style={({ pressed }) => ({
         width: "100%",
         height: data.isFullWidth ? 280 : 340,
         borderRadius: 16,
         overflow: "hidden",
         borderWidth: 1,
         borderColor: "rgba(255,255,255,0.05)",
-      }}
+        opacity: pressed ? 0.9 : 1,
+      })}
     >
       <Image
         source={{ uri: data.imageUri }}
@@ -346,7 +408,16 @@ function ServiceCard({ data }: { data: ServiceCardData }) {
         >
           {data.description}
         </Text>
-        <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 8, marginTop: 16 }}>
+        <Pressable
+          onPress={onPress}
+          style={({ pressed }) => ({
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 8,
+            marginTop: 16,
+            opacity: pressed ? 0.7 : 1,
+          })}
+        >
           <Text
             style={{
               fontFamily: "Manrope_700Bold",
@@ -379,6 +450,7 @@ function ChatView({
   onBack: () => void;
 }) {
   const insets = useSafeAreaInsets();
+  const flatListRef = useRef<FlatList>(null);
 
   return (
     <KeyboardAvoidingView
@@ -403,7 +475,10 @@ function ChatView({
             gap: 16,
           }}
         >
-          <Pressable onPress={onBack}>
+          <Pressable
+            onPress={onBack}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
             <MaterialIcons name="arrow-back" size={24} color={Colors.primary} />
           </Pressable>
           <View style={{ flex: 1, alignItems: "center" }}>
@@ -424,10 +499,12 @@ function ChatView({
 
       {/* Messages */}
       <FlatList
+        ref={flatListRef}
         data={messages}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ padding: 24, gap: 16 }}
+        contentContainerStyle={{ padding: 24, gap: 16, paddingBottom: 16 }}
         showsVerticalScrollIndicator={false}
+        onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
         ListHeaderComponent={
           <Animated.View
             entering={FadeInDown.duration(600)}
@@ -561,17 +638,6 @@ function ChatView({
             borderColor: "rgba(255,255,255,0.1)",
           }}
         >
-          <Pressable
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 22,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <MaterialIcons name="add-circle" size={24} color={Colors.outline} />
-          </Pressable>
           <TextInput
             value={inputText}
             onChangeText={setInputText}
@@ -585,20 +651,22 @@ function ChatView({
               color: Colors.onSurface,
               maxHeight: 100,
               paddingVertical: 12,
-              paddingHorizontal: 4,
+              paddingHorizontal: 12,
             }}
             onSubmitEditing={sendMessage}
+            returnKeyType="send"
           />
           <Pressable
             onPress={sendMessage}
-            style={{
+            style={({ pressed }) => ({
               width: 44,
               height: 44,
               borderRadius: 22,
-              backgroundColor: Colors.primary,
+              backgroundColor: pressed ? Colors.primaryFixed : Colors.primary,
               alignItems: "center",
               justifyContent: "center",
-            }}
+              opacity: inputText.trim() ? 1 : 0.5,
+            })}
           >
             <MaterialIcons name="arrow-upward" size={22} color={Colors.onPrimary} />
           </Pressable>

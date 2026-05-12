@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NORBU - AI Concierge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Playfair+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#e3c282",
+                      "primary-fixed": "#ffdea0",
+                      "surface-container-high": "#2d2925",
+                      "on-tertiary": "#222f53",
+                      "tertiary-container": "#9facd7",
+                      "surface-dim": "#16130f",
+                      "surface-container": "#221f1b",
+                      "primary-fixed-dim": "#e3c282",
+                      "tertiary-fixed": "#dae1ff",
+                      "on-error": "#690005",
+                      "secondary-fixed": "#ffdea4",
+                      "on-secondary-fixed-variant": "#5c4308",
+                      "surface": "#16130f",
+                      "tertiary": "#bac7f4",
+                      "primary-container": "#c8a96b",
+                      "on-tertiary-container": "#334064",
+                      "inverse-on-surface": "#33302b",
+                      "outline-variant": "#4d463a",
+                      "on-secondary": "#412d00",
+                      "background": "#16130f",
+                      "secondary": "#e7c17c",
+                      "inverse-surface": "#e9e1da",
+                      "error-container": "#93000a",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#38342f",
+                      "on-surface": "#e9e1da",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#b8c5f2",
+                      "on-surface-variant": "#d0c5b5",
+                      "surface-container-highest": "#38342f",
+                      "on-primary-fixed-variant": "#5a430f",
+                      "secondary-container": "#5c4308",
+                      "surface-container-lowest": "#100e0a",
+                      "on-primary-container": "#533d09",
+                      "on-secondary-fixed": "#261900",
+                      "outline": "#998f81",
+                      "surface-container-low": "#1e1b17",
+                      "secondary-fixed-dim": "#e7c17c",
+                      "on-background": "#e9e1da",
+                      "inverse-primary": "#735b25",
+                      "primary": "#e5c484",
+                      "on-primary": "#402d00",
+                      "on-primary-fixed": "#261a00",
+                      "on-tertiary-fixed": "#0b1a3d",
+                      "on-secondary-container": "#d4b06d",
+                      "on-tertiary-fixed-variant": "#39466b",
+                      "surface-bright": "#3c3933"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-gap-lg": "32px",
+                      "container-margin": "24px",
+                      "stack-gap-md": "16px",
+                      "stack-gap-sm": "8px",
+                      "section-padding": "48px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "title-lg": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "headline-lg": [
+                              "Playfair Display"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "label-caps": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for chat area to maintain sleekness */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(227, 194, 130, 0.5); /* Primary color */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md selection:bg-primary selection:text-on-primary flex flex-col min-h-screen relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/5 shadow-none transition-all">
+<button class="text-primary dark:text-primary hover:opacity-80 transition-opacity scale-95 duration-200 focus:outline-none">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md tracking-widest text-primary dark:text-primary uppercase">NORBU</h1>
+<button class="w-8 h-8 rounded-full overflow-hidden border border-white/10 hover:opacity-80 transition-opacity scale-95 duration-200 focus:outline-none bg-surface-container-high flex items-center justify-center">
+<img alt="Guest profile avatar" class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of an elegant individual used as a profile avatar. The lighting is soft and cinematic, capturing a sense of quiet luxury and high-net-worth lifestyle. The background is a beautifully blurred, warm-toned upscale environment, complementing the dark mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArHfngfg1wsLMnRSYKYN-AH-g533166LXBM2-QUXt90By5UKsNfgy3uI9K0-oKoio6RsyyayqyZ6qcdhaQYIpmmvYcPEZmACyDvypQxVGaKe5QS1w3j-z8ikwHDeJeLATMBy0ww6zfuyYzBk1Xjy2302R6nzAIR-VyOo1qeBM3cx38896y_RZgmF-2Yio3eAwtOGTVgdHEjWfFGbzdic44Ko16t5vp_kNVjp-mG1lUlRrQBwGNAexHHHSjigj2pY2A-yYKc5B9mb4"/>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow pt-24 pb-48 md:pb-32 flex flex-col max-w-4xl mx-auto w-full">
+<!-- Welcome Header -->
+<div class="px-container-margin py-stack-gap-lg flex flex-col items-center text-center animate-fade-in-up">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-stack-gap-md border border-white/5 shadow-[0_0_30px_rgba(227,194,130,0.05)]">
+<span class="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_10px_rgba(227,194,130,0.3)]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-gap-sm">How may I assist you?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">Your personal AI concierge, dedicated to elevating your experience and anticipating your every need.</p>
+</div>
+<!-- Suggested Prompts (Bento Grid Style) -->
+<div class="px-container-margin mb-section-padding">
+<h3 class="font-label-caps text-label-caps text-outline mb-stack-gap-md uppercase tracking-widest pl-1">Suggested Requests</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-gap-sm">
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors duration-300 text-left p-4 rounded-xl border border-white/5 flex items-start gap-4 group focus:outline-none focus:ring-1 focus:ring-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 group-hover:border-primary/20 transition-colors z-10">
+<span class="material-symbols-outlined text-secondary opacity-80 group-hover:opacity-100 group-hover:text-primary transition-all">restaurant</span>
+</div>
+<div class="z-10 pt-0.5">
+<span class="font-title-lg text-title-lg text-on-surface block mb-1">Best restaurants near Burj Khalifa?</span>
+<span class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Discover Michelin-starred dining options.</span>
+</div>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors duration-300 text-left p-4 rounded-xl border border-white/5 flex items-start gap-4 group focus:outline-none focus:ring-1 focus:ring-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 group-hover:border-primary/20 transition-colors z-10">
+<span class="material-symbols-outlined text-secondary opacity-80 group-hover:opacity-100 group-hover:text-primary transition-all">local_taxi</span>
+</div>
+<div class="z-10 pt-0.5">
+<span class="font-title-lg text-title-lg text-on-surface block mb-1">Book airport pickup</span>
+<span class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Arrange a premium fleet transfer.</span>
+</div>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors duration-300 text-left p-4 rounded-xl border border-white/5 flex items-start gap-4 group focus:outline-none focus:ring-1 focus:ring-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 group-hover:border-primary/20 transition-colors z-10">
+<span class="material-symbols-outlined text-secondary opacity-80 group-hover:opacity-100 group-hover:text-primary transition-all">spa</span>
+</div>
+<div class="z-10 pt-0.5">
+<span class="font-title-lg text-title-lg text-on-surface block mb-1">Schedule a spa treatment</span>
+<span class="font-body-md text-body-md text-on-surface-variant line-clamp-1">In-residence or partner wellness centers.</span>
+</div>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors duration-300 text-left p-4 rounded-xl border border-white/5 flex items-start gap-4 group focus:outline-none focus:ring-1 focus:ring-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 group-hover:border-primary/20 transition-colors z-10">
+<span class="material-symbols-outlined text-secondary opacity-80 group-hover:opacity-100 group-hover:text-primary transition-all">event_seat</span>
+</div>
+<div class="z-10 pt-0.5">
+<span class="font-title-lg text-title-lg text-on-surface block mb-1">Exclusive event access</span>
+<span class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Secure VIP tickets to upcoming galas.</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Chat Interface Area -->
+<div class="px-container-margin flex flex-col gap-stack-gap-md flex-grow">
+<!-- AI Message -->
+<div class="flex items-end gap-3 max-w-[85%] sm:max-w-[75%]">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 mb-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="bg-surface-container-high rounded-2xl rounded-bl-sm p-4 border border-white/5 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent"></div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">Good evening. I have reviewed your itinerary. Would you like me to finalize the yacht charter for tomorrow afternoon? I can also arrange for catering on board.</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1 self-end max-w-[85%] sm:max-w-[75%] mt-4">
+<div class="bg-primary text-on-primary rounded-2xl rounded-br-sm p-4 shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed font-medium">Yes, please. Ensure they have the vintage champagne we discussed, and arrange transport from the residence at 2 PM sharp.</p>
+</div>
+<span class="font-label-caps text-label-caps text-outline text-[10px] mr-1">Just now</span>
+</div>
+<!-- AI Message (Typing) -->
+<div class="flex items-end gap-3 max-w-[85%] sm:max-w-[75%] mt-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-white/5 mb-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="bg-surface-container-high rounded-2xl rounded-bl-sm p-4 py-5 border border-white/5 shadow-sm flex gap-1.5 items-center min-w-[60px] justify-center">
+<div class="w-1.5 h-1.5 bg-primary/60 rounded-full animate-pulse"></div>
+<div class="w-1.5 h-1.5 bg-primary/60 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+<div class="w-1.5 h-1.5 bg-primary/60 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Input Area -->
+<div class="fixed bottom-[80px] md:bottom-0 left-0 w-full bg-gradient-to-t from-background via-background/95 to-transparent pt-12 pb-6 px-container-margin z-40 pointer-events-none">
+<div class="max-w-4xl mx-auto relative pointer-events-auto">
+<div class="flex items-end gap-2 bg-surface-container-high/90 rounded-[28px] p-2 border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl transition-all duration-300 focus-within:border-primary/40 focus-within:bg-surface-container-highest/95">
+<button class="p-3 text-outline hover:text-primary transition-colors flex-shrink-0 rounded-full hover:bg-white/5 focus:outline-none self-end mb-0.5">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-outline-variant resize-none py-4 px-2 max-h-[120px] overflow-y-auto leading-relaxed focus:outline-none" placeholder="Ask for anything..." rows="1" style="min-height: 56px;"></textarea>
+<button class="w-12 h-12 bg-primary text-on-primary hover:bg-primary-fixed transition-colors flex-shrink-0 rounded-full flex items-center justify-center shadow-sm focus:outline-none self-end mb-0.5 group">
+<span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+</button>
+</div>
+<div class="text-center mt-4">
+<span class="font-label-caps text-[10px] text-outline opacity-40 uppercase tracking-widest">NORBU AI can make mistakes. Please verify details.</span>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only per requested style) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface/90 dark:bg-surface/90 backdrop-blur-3xl border-t border-white/5 shadow-[0px_-10px_40px_rgba(0,0,0,0.4)] md:hidden">
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">home_work</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary scale-110 transition-transform active" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">room_service</span>
+<span class="font-label-caps text-label-caps mt-1">Concierge</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">explore</span>
+<span class="font-label-caps text-label-caps mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">location_city</span>
+<span class="font-label-caps text-label-caps mt-1">Properties</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NORBU - Explore Dubai</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#e3c282",
+                    "primary-fixed": "#ffdea0",
+                    "surface-container-high": "#2d2925",
+                    "on-tertiary": "#222f53",
+                    "tertiary-container": "#9facd7",
+                    "surface-dim": "#16130f",
+                    "surface-container": "#221f1b",
+                    "primary-fixed-dim": "#e3c282",
+                    "tertiary-fixed": "#dae1ff",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#ffdea4",
+                    "on-secondary-fixed-variant": "#5c4308",
+                    "surface": "#16130f",
+                    "tertiary": "#bac7f4",
+                    "primary-container": "#c8a96b",
+                    "on-tertiary-container": "#334064",
+                    "inverse-on-surface": "#33302b",
+                    "outline-variant": "#4d463a",
+                    "on-secondary": "#412d00",
+                    "background": "#16130f",
+                    "secondary": "#e7c17c",
+                    "inverse-surface": "#e9e1da",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#38342f",
+                    "on-surface": "#e9e1da",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#b8c5f2",
+                    "on-surface-variant": "#d0c5b5",
+                    "surface-container-highest": "#38342f",
+                    "on-primary-fixed-variant": "#5a430f",
+                    "secondary-container": "#5c4308",
+                    "surface-container-lowest": "#100e0a",
+                    "on-primary-container": "#533d09",
+                    "on-secondary-fixed": "#261900",
+                    "outline": "#998f81",
+                    "surface-container-low": "#1e1b17",
+                    "secondary-fixed-dim": "#e7c17c",
+                    "on-background": "#e9e1da",
+                    "inverse-primary": "#735b25",
+                    "primary": "#e5c484",
+                    "on-primary": "#402d00",
+                    "on-primary-fixed": "#261a00",
+                    "on-tertiary-fixed": "#0b1a3d",
+                    "on-secondary-container": "#d4b06d",
+                    "on-tertiary-fixed-variant": "#39466b",
+                    "surface-bright": "#3c3933"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-gap-lg": "32px",
+                    "container-margin": "24px",
+                    "stack-gap-md": "16px",
+                    "stack-gap-sm": "8px",
+                    "section-padding": "48px"
+            },
+            "fontFamily": {
+                    "headline-md": [
+                            "Playfair Display"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "title-lg": [
+                            "Manrope"
+                    ],
+                    "display-lg": [
+                            "Playfair Display"
+                    ],
+                    "headline-lg": [
+                            "Playfair Display"
+                    ],
+                    "body-lg": [
+                            "Manrope"
+                    ],
+                    "label-caps": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "title-lg": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        /* Hide scrollbar for immersive horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/5">
+<!-- Mobile Leading Icon -->
+<button aria-label="Menu" class="md:hidden text-primary dark:text-primary hover:opacity-80 transition-opacity scale-95 duration-200">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<!-- Brand Logo -->
+<div class="font-headline-md text-headline-md tracking-widest text-primary dark:text-primary">
+            NORBU
+        </div>
+<!-- Desktop Navigation Cluster (Responsive Pivot) -->
+<nav class="hidden md:flex items-center gap-stack-gap-lg">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Concierge</a>
+<!-- Active State -->
+<a class="font-label-caps text-label-caps text-primary dark:text-primary hover:opacity-80 transition-opacity" href="#">Explore</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Properties</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity" href="#">Profile</a>
+</nav>
+<!-- Trailing Avatar -->
+<button aria-label="Guest profile avatar" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:opacity-80 transition-opacity scale-95 duration-200">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A cinematic, high-contrast black and white portrait of a sophisticated man wearing a tailored suit, looking slightly off-camera. The lighting is moody and dramatic, emphasizing quiet luxury and high-net-worth status. The background is a deeply blurred, dark architectural space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSE0n8kve4npLSI17T_6RA-2C1CtKVaheaDLAtl6hb3eCOezv2F9FL4I8BPm34tdT5J2Fdon5foZjq7m1TkYuU6E48-p1-jEd2rBNLnzGup96TAgEW8xaSgMRZbF9k49My_dtJ_-A5u78oBdsHdkrNHj6kOm7SoBHvXFVYSSfcaocKtLn9N-rESnKbIr5NHqZt-1A2J7ybIar0wHtXn1YL6ucGp-Ilz0LW75l8Z0YU73InAcDaIxVsrhGdmghJsZkWASGodDGbqVk"/>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-16 pb-24 md:pb-16 w-full max-w-[1440px] mx-auto flex flex-col gap-section-padding">
+<!-- Hero Section -->
+<section class="relative w-full h-[663px] md:h-[751px] flex items-end px-container-margin pb-stack-gap-lg">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A breathtaking, cinematic wide shot of the Dubai skyline at dusk. The sky transitions from deep indigo to warm sunset tones. Towering, ultra-modern glass skyscrapers reflect the fading light. The overall mood is deeply aspirational, luxurious, and expansive, fitting a high-net-worth aesthetic. A subtle, dark vignette frames the edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUYW_PjEv5LwXH43L11kqcVwKbPmwl5CUoTFistFCePQWjYPFCMyhg9olCDfnHGu3V8jrjCGdijk--TuV5k94Qpx-a-G7GJ_1WeZ6b6LAY_bGIunpSsB9Squgo_z80J9HSDfBhDUbn1qG8GnhWUo_A8c85vtcr-mnvVFdJHCzcmYhhcm6FMwEPbJ3MjQQ4IHMEBzsJQ-u3G_Fi_A2hbnytSU6YTwsVZepL5WGu8HrNoF8UfiuEtZRazyX0WOm-uYrZrwHvZVb1Vfo"/>
+<!-- Tonal Layering & Deep Shadow Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-3xl flex flex-col gap-stack-gap-sm">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Curated Experiences</span>
+<h1 class="font-display-lg text-display-lg text-on-surface">Explore Dubai</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Discover the pinnacle of metropolitan luxury. From sky-high lounges to pristine private shores, curate your ultimate itinerary.
+                </p>
+</div>
+</section>
+<!-- Bento Grid Categories -->
+<section class="px-container-margin flex flex-col gap-stack-gap-lg">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Signatures</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-gap-md auto-rows-[320px]">
+<!-- Bento Item 1: Rooftops (Spans 2 cols on md) -->
+<a class="group relative rounded-xl overflow-hidden md:col-span-2 block shadow-[0px_40px_40px_-20px_rgba(0,0,0,0.4)]" href="#">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An exclusive rooftop infinity pool lounge in Dubai at night. Glowing warm underwater lights contrast with the sleek, matte black architectural elements of the deck. In the blurred background, the glittering city lights create an atmosphere of vibrant, high-end nightlife. The aesthetic is extremely polished and minimalist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjqw8SL3rWBydyBUJpZkZEEeB0F5qO4PO26GZdRp0viupIUIfDxfuzDl-eHdyx1dK9pznuIelkx1R7O2et9qOU-3SxN01ZDMMvDGTUgD2-SP6d0tnVyv_5A7PT4vFpryYW3RVEINOxE7ThJG0aFWJhYFONbYBQQKY8ybRVII_6KtPBQk-9QG33BNLqyRRbMyxhxS4qzQboywgSznilQylpe54ZZbGjvYs7ZkiLCwdcXMNkq9F3QAEy48HPJ4nCo2ykuQIZAsxEvVY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-stack-gap-md w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">local_bar</span>
+<span class="font-label-caps text-label-caps text-primary">Sky-High</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Rooftop Lounges</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 line-clamp-2">Elevate your evening with panoramic views and bespoke mixology.</p>
+</div>
+</a>
+<!-- Bento Item 2: Beach Clubs -->
+<a class="group relative rounded-xl overflow-hidden block shadow-[0px_40px_40px_-20px_rgba(0,0,0,0.4)]" href="#">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious, minimalist private cabana at a high-end Dubai beach club. Clean lines of white linen and warm teak wood stand out against the pristine, sun-drenched sand. The lighting is bright yet soft, creating a serene, exclusive sanctuary feel. No crowds are visible, emphasizing privacy and calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHNx0RYKgpFQu6qLN8qK8UAJ9Cx8gTgZZKtMXCiHxIcwLNTxnfqRTIjUK6d3pOIk9N0hKloAmo-oAecig59eteSMByX8XiFdgoC6bjIpG9JkEBDnRAhTR-7VJcbqx71YEzex1A3NZNv3hD_jy4qiGP-gPSUuo6ZdhgmQY1anc_zuQKbZYPlj8oGgVm_NVcO4dGoOHpIKshhHk7tfHTc2VE3QvlB-WI8w0vCywp9P3POYZF6kT7N-2M5BMU8JyDrJDQLvB70xI5T4Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-stack-gap-md w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">beach_access</span>
+<span class="font-label-caps text-label-caps text-primary">Riviera</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Beach Clubs</h3>
+</div>
+</a>
+<!-- Bento Item 3: Shopping -->
+<a class="group relative rounded-xl overflow-hidden md:col-span-3 h-[240px] block shadow-[0px_40px_40px_-20px_rgba(0,0,0,0.4)]" href="#">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="The interior of a hyper-luxury fashion boutique. Glossy marble floors reflect warm, sculptural ambient lighting. Minimalist racks display haute couture garments. The color palette is dominated by deep charcoal, soft champagne gold, and stark whites. The environment feels incredibly quiet, expensive, and meticulously curated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOHdTPqDIFuEEVuR_6Z-h9kTTsMLoH6_GXY5WIeBJ1svS4jV7HJpL18WTV_GjRfc5ekbPOKKiNP-zVPGqisuhTv1tLFKU8Yn3c1RaVNt98ux61iE-Xo-1CpPFFJ9zGC_7qEIdjkacV0u-fjZJKnYW_dZx1U9Q6SDp-BE9Mde1-6EEMy69ZmSBYTMc9oUCFZ4-pt9Gx08PmLgq3g3ZyZfLXqdqNTgl_RO1gmdIbF7584JTAsx0jblt4UaJHXvJNJ1V7O1UFveThID0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-stack-gap-md w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-caps text-label-caps text-primary">Haute Couture</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Luxury Retail</h3>
+</div>
+</a>
+</div>
+</section>
+<!-- Immersive Horizontal Scroll -->
+<section class="pl-container-margin flex flex-col gap-stack-gap-lg overflow-hidden">
+<h2 class="font-headline-lg text-headline-lg text-on-surface pr-container-margin">Trending Now</h2>
+<div class="flex gap-stack-gap-md overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pr-container-margin">
+<!-- Scroll Item 1 -->
+<div class="snap-start shrink-0 w-[280px] md:w-[320px] flex flex-col gap-stack-gap-sm">
+<div class="w-full aspect-[4/5] rounded-xl overflow-hidden relative shadow-[0px_20px_40px_-10px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of an artisanal, high-end cocktail sitting on a dark, reflective marble bar top. The drink is garnished with a delicate piece of gold leaf. Soft, warm ambient light highlights the condensation on the crystal glass. The surrounding space is dark, implying a moody, ultra-exclusive speakeasy environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN5h8GFzv-XPOo8zykjz9tHXhEnZIiazxFvX69brlU2eUJRxk7dP2MVkwLtfMkWhGpwx4O7hxAZTI1Wl009jQxG1mzt7413wbBzE22P5sLmZRZ41FXOJlW6Ocs33XKqXdAFQTZ6ylax6Dj-MNpaWw2im2X8dblrANFKiKSm58pdfLhPJ4nh7vZZnWNZAyuBdssYVPS7rNgiesjFeOlsNrUi4PbZ1fJeO-xHhlUyjagoMs8BbHsz36Fk6GYIuYQ6ByNl-gffEISeF0"/>
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/50 backdrop-blur-md flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-on-surface text-[16px]">bookmark</span>
+</div>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Galaxy Bar</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">DIFC • Lounge</p>
+</div>
+</div>
+<!-- Scroll Item 2 -->
+<div class="snap-start shrink-0 w-[280px] md:w-[320px] flex flex-col gap-stack-gap-sm">
+<div class="w-full aspect-[4/5] rounded-xl overflow-hidden relative shadow-[0px_20px_40px_-10px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover" data-alt="An expansive view of an infinity pool seamlessly blending into the horizon of the Arabian Gulf. Minimalist sun loungers in dark tones line the edge. The scene is captured at dusk, with the sky a wash of deep purples and soft oranges. The atmosphere represents absolute tranquility and refined luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD53vW-oQKH-QStfW2nEv1M5KHCHc1pd-MSNI0VqiC_GtWZe204W7rOAF-viwg92Zk96nOPTUIamqx0ZKzjgviG6rbWnU3snyTsActliNZ-qwWM2D-5raRW36J8_jkA7nABUUYhL7FX-fOm-QjAbOo8PzZtdPJP2dZjTKCCqhbaDJr9-SfPDISOhRKjawOsxnZNZUtEfsfMU1UR_zDWpnwczA77xbJfbmw6z03Ox7BsbcAxT0JArIZGTokYOcbCZ-J0gn7uWpOhgCg"/>
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/50 backdrop-blur-md flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-on-surface text-[16px]">bookmark</span>
+</div>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Aura Skypool</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Palm Jumeirah • Beach Club</p>
+</div>
+</div>
+<!-- Scroll Item 3 -->
+<div class="snap-start shrink-0 w-[280px] md:w-[320px] flex flex-col gap-stack-gap-sm">
+<div class="w-full aspect-[4/5] rounded-xl overflow-hidden relative shadow-[0px_20px_40px_-10px_rgba(0,0,0,0.5)]">
+<img class="w-full h-full object-cover" data-alt="A detail shot of highly textured, premium leather goods displayed on a matte black pedestal in a luxury boutique. The lighting is cinematic, utilizing deep shadows and precise spotlights to emphasize the craftsmanship and material quality. The overall aesthetic is dark, moody, and undeniably expensive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA_FY_bpIEIGgsfNuyYBNmUhfmXFnvRBPaBBlP458Jdfl9B1jclE4XJkKglNOZ4PYJuP85h-WQS-vINVKCyYiX6hrVLld7aOQrenmjWWUdq_w54UoOlNDzxuKrBheSst4ESkKjk5b6Q2U9QSEHehiOBnD9U7Y7IbRcv0UStOkPm4jG9lf9j_06PlohFHv_l38QAQlB2L9Tka8emZfge2ZCRWB24KYuZpA_PiHrc5COBi_t7aOOAz5CHsLv38w0jfgrAGugYIZsCIQ"/>
+<div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/50 backdrop-blur-md flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-on-surface text-[16px]">bookmark</span>
+</div>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-on-surface">Fashion Avenue</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Downtown • Retail</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface/90 dark:bg-surface/90 backdrop-blur-3xl border-t border-white/5 shadow-[0px_-10px_40px_rgba(0,0,0,0.4)]">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-active:scale-90 duration-300 ease-out" style="font-variation-settings: 'FILL' 0;">home_work</span>
+<span class="font-label-caps text-[10px] mt-1">Home</span>
+</a>
+<!-- Concierge (Inactive) -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-active:scale-90 duration-300 ease-out" style="font-variation-settings: 'FILL' 0;">room_service</span>
+<span class="font-label-caps text-[10px] mt-1">Concierge</span>
+</a>
+<!-- Explore (Active - Semantic Match) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary scale-110 transition-transform group" href="#">
+<span class="material-symbols-outlined text-[24px] group-active:scale-90 duration-300 ease-out" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-caps text-[10px] mt-1">Explore</span>
+</a>
+<!-- Properties (Inactive) -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-active:scale-90 duration-300 ease-out" style="font-variation-settings: 'FILL' 0;">location_city</span>
+<span class="font-label-caps text-[10px] mt-1">Properties</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-active:scale-90 duration-300 ease-out" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-caps text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

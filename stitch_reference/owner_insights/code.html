@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Property Owner Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#e3c282",
+                        "primary-fixed": "#ffdea0",
+                        "surface-container-high": "#2d2925",
+                        "on-tertiary": "#222f53",
+                        "tertiary-container": "#9facd7",
+                        "surface-dim": "#16130f",
+                        "surface-container": "#221f1b",
+                        "primary-fixed-dim": "#e3c282",
+                        "tertiary-fixed": "#dae1ff",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#ffdea4",
+                        "on-secondary-fixed-variant": "#5c4308",
+                        "surface": "#16130f",
+                        "tertiary": "#bac7f4",
+                        "primary-container": "#c8a96b",
+                        "on-tertiary-container": "#334064",
+                        "inverse-on-surface": "#33302b",
+                        "outline-variant": "#4d463a",
+                        "on-secondary": "#412d00",
+                        "background": "#16130f",
+                        "secondary": "#e7c17c",
+                        "inverse-surface": "#e9e1da",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#38342f",
+                        "on-surface": "#e9e1da",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b8c5f2",
+                        "on-surface-variant": "#d0c5b5",
+                        "surface-container-highest": "#38342f",
+                        "on-primary-fixed-variant": "#5a430f",
+                        "secondary-container": "#5c4308",
+                        "surface-container-lowest": "#100e0a",
+                        "on-primary-container": "#533d09",
+                        "on-secondary-fixed": "#261900",
+                        "outline": "#998f81",
+                        "surface-container-low": "#1e1b17",
+                        "secondary-fixed-dim": "#e7c17c",
+                        "on-background": "#e9e1da",
+                        "inverse-primary": "#735b25",
+                        "primary": "#e5c484",
+                        "on-primary": "#402d00",
+                        "on-primary-fixed": "#261a00",
+                        "on-tertiary-fixed": "#0b1a3d",
+                        "on-secondary-container": "#d4b06d",
+                        "on-tertiary-fixed-variant": "#39466b",
+                        "surface-bright": "#3c3933"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-gap-lg": "32px",
+                        "container-margin": "24px",
+                        "stack-gap-md": "16px",
+                        "stack-gap-sm": "8px",
+                        "section-padding": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Manrope"],
+                        "title-lg": ["Manrope"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Manrope"],
+                        "label-caps": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased pb-24 md:pb-0 pt-16">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/5 fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16">
+<button aria-label="Menu" class="text-primary dark:text-primary hover:opacity-80 transition-opacity scale-95 duration-200">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<div class="font-headline-md text-headline-md tracking-widest text-primary dark:text-primary">
+            NORBU
+        </div>
+<button aria-label="Profile" class="hover:opacity-80 transition-opacity scale-95 duration-200">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/10">
+<img alt="Guest profile avatar" class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of a professional individual in a dimly lit, high-end environment. Soft, cinematic lighting highlights their features against a dark, out-of-focus background. The mood is calm, confident, and perfectly aligns with a quiet luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRktJH0QDtfGkHkpR31CcwKnC6HWDyjYSm5p0U24UC_dE_7U953d3_S5c2UTfQcVNCKwEAyROvKpwV9J1QCRQy0j7TKGCqPZgk2BVRQHRF8nMzC_mKGteAs65RT4OZJZwYYqgBEVp2Dd4N0i93FTJhEGhDOzEwLVCfMui4iA9w1x9irADLMcNQhCJrJtjUDq4RxhP4Cp1U-12DM00ZXQ5rsJdAMpj3_j6-EosCvPsJZVlCwxs33cxEoMBeyQXaz6GiMiaYTwax3Ls"/>
+</div>
+</button>
+</header>
+<main class="px-container-margin max-w-7xl mx-auto pt-section-padding">
+<!-- Header Section -->
+<div class="mb-section-padding text-center">
+<h1 class="font-display-lg text-display-lg text-on-background mb-stack-gap-sm">Portfolio Performance</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Analytics and insights for your exclusive properties.</p>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-container-margin mb-section-padding">
+<!-- Total Earnings -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-white/5 relative overflow-hidden group hover:border-primary/30 transition-colors duration-300">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex items-center justify-between mb-4 relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MONTHLY EARNINGS</span>
+<span class="material-symbols-outlined text-primary/70">account_balance_wallet</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-background mb-2 relative z-10">$142,500</div>
+<div class="flex items-center gap-2 relative z-10">
+<span class="material-symbols-outlined text-primary text-[16px]">trending_up</span>
+<span class="font-body-md text-body-md text-primary">+12.4% vs last month</span>
+</div>
+</div>
+<!-- Average Occupancy -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-white/5 relative overflow-hidden group hover:border-primary/30 transition-colors duration-300">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex items-center justify-between mb-4 relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">AVG OCCUPANCY</span>
+<span class="material-symbols-outlined text-primary/70">bed</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-background mb-2 relative z-10">84%</div>
+<div class="flex items-center gap-2 relative z-10">
+<span class="material-symbols-outlined text-primary text-[16px]">trending_up</span>
+<span class="font-body-md text-body-md text-primary">+3.2% vs last month</span>
+</div>
+</div>
+<!-- Total Bookings -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-white/5 relative overflow-hidden group hover:border-primary/30 transition-colors duration-300">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex items-center justify-between mb-4 relative z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant">TOTAL BOOKINGS</span>
+<span class="material-symbols-outlined text-primary/70">calendar_today</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-background mb-2 relative z-10">28</div>
+<div class="flex items-center gap-2 relative z-10">
+<span class="material-symbols-outlined text-outline text-[16px]">trending_flat</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Consistent with last month</span>
+</div>
+</div>
+</div>
+<!-- Bento Layout: Charts & Properties -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-container-margin mb-section-padding">
+<!-- Revenue Chart Area (Spans 2 columns on lg) -->
+<div class="lg:col-span-2 bg-surface-container rounded-xl p-6 border border-white/5 flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-title-lg text-title-lg text-on-background">Revenue Overview</h2>
+<button class="font-label-caps text-label-caps text-primary border border-primary/30 rounded-full px-4 py-2 hover:bg-primary/10 transition-colors">YTD</button>
+</div>
+<!-- Abstract Representation of a Chart using pure CSS/HTML -->
+<div class="flex-grow relative flex items-end justify-between pt-8 gap-2">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-t border-white/5 w-full"></div>
+<div class="border-t border-white/5 w-full"></div>
+<div class="border-t border-white/5 w-full"></div>
+<div class="border-t border-white/5 w-full"></div>
+</div>
+<!-- Bars -->
+<div class="w-full bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm h-[40%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$85k</div></div>
+<div class="w-full bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm h-[55%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$110k</div></div>
+<div class="w-full bg-primary/30 hover:bg-primary/50 transition-colors rounded-t-sm h-[45%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$95k</div></div>
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors rounded-t-sm h-[70%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$135k</div></div>
+<div class="w-full bg-primary hover:bg-primary-fixed transition-colors rounded-t-sm h-[85%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$142k</div></div>
+<div class="w-full bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm h-[30%] relative group"><div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-caps text-label-caps text-on-background transition-opacity">$60k</div></div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-4 text-outline font-label-caps text-label-caps">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span class="text-primary">May</span>
+<span>Jun</span>
+</div>
+</div>
+<!-- Top Performing Property -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-white/5 relative group h-[400px]">
+<img alt="Villa Azure" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700" data-alt="A luxurious modern villa at dusk, featuring expansive floor-to-ceiling glass windows illuminating a sleek, minimalist interior. The exterior showcases sharp architectural lines, a pristine infinity pool reflecting the warm, golden evening sky, and subtle, sophisticated ambient lighting. The mood is highly exclusive and serene, perfectly embodying the dark, cinematic luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzQ-jhud8_iyfARsqfkCUytMcsD3J1uda52xbiKRi-1YHnft7gXv3P0mlhiO0V3jCVmBuNqpu7nkQPGoZXPIRo3BQwSUnENXeT8bYXDTlLjPSiVgmQeUDhfibsJ-3TjGghG0lyKA_UvWbOYjCrzlAefr2PQWVhpKN3wT6v8yCBWOprkiveWoqkTVeWBug7WfUaftTzcume13Bnjo3y8jdTDV1hFutM07SOwDasbSAdUR9co8ru3_mGJ0rcu9eeZ6qP0QRBN67Zvq0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6">
+<div class="bg-surface/40 backdrop-blur-md rounded-full px-3 py-1 inline-block mb-4 border border-white/10">
+<span class="font-label-caps text-label-caps text-primary tracking-widest">TOP PERFORMER</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">The Azure Villa</h3>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">Dubai Marina</p>
+<p class="font-title-lg text-title-lg text-primary">$68,000 <span class="font-body-sm text-[12px] text-outline font-normal">this month</span></p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors border border-white/20">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface/90 dark:bg-surface/90 backdrop-blur-3xl border-t border-white/5 shadow-[0px_-10px_40px_rgba(0,0,0,0.4)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden">
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home_work</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">room_service</span>
+<span class="font-label-caps text-label-caps">Concierge</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="font-label-caps text-label-caps">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary scale-110 transition-transform hover:text-primary-fixed-dim" href="#">
+<span class="material-symbols-outlined mb-1 fill">location_city</span>
+<span class="font-label-caps text-label-caps">Properties</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline opacity-60 hover:text-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,10 +1,12 @@
-import React from "react";
-import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Pressable, ScrollView, Dimensions, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import Animated, { FadeInDown, FadeInRight } from "react-native-reanimated";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
+import { GoldButton } from "@/components/ui/GoldButton";
 import { Colors } from "@/constants/colors";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
@@ -97,6 +99,10 @@ const TRENDING_ITEMS: TrendingItem[] = [
 ];
 
 export default function ExploreScreen() {
+  const router = useRouter();
+  const [showUnderDev, setShowUnderDev] = useState(false);
+  const showUnderDevModal = () => setShowUnderDev(true);
+
   return (
     <ScreenContainer showHeader={true}>
       {/* Hero Section */}
@@ -196,7 +202,7 @@ export default function ExploreScreen() {
             entering={FadeInDown.delay(400 + index * 100).duration(500)}
             style={{ marginBottom: 16 }}
           >
-            <BentoCard item={item} />
+            <BentoCard item={item} onPress={showUnderDevModal} />
           </Animated.View>
         ))}
       </Animated.View>
@@ -232,27 +238,99 @@ export default function ExploreScreen() {
               key={item.id}
               entering={FadeInRight.delay(800 + index * 100).duration(500)}
             >
-              <TrendingCard item={item} />
+              <TrendingCard item={item} onPress={showUnderDevModal} />
             </Animated.View>
           ))}
         </ScrollView>
       </Animated.View>
+
+      {/* Under Development Modal */}
+      <Modal
+        visible={showUnderDev}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowUnderDev(false)}
+      >
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 32,
+          }}
+          onPress={() => setShowUnderDev(false)}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.surfaceContainerHigh,
+              borderRadius: 24,
+              padding: 32,
+              alignItems: "center",
+              maxWidth: 320,
+              width: "100%",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.1)",
+            }}
+          >
+            <View
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 32,
+                backgroundColor: "rgba(229, 196, 132, 0.15)",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 20,
+              }}
+            >
+              <MaterialIcons name="engineering" size={32} color={Colors.primary} />
+            </View>
+            <Text
+              style={{
+                fontFamily: "PlayfairDisplay_500Medium",
+                fontSize: 22,
+                color: Colors.onSurface,
+                marginBottom: 8,
+                textAlign: "center",
+              }}
+            >
+              Under Development
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Manrope_400Regular",
+                fontSize: 14,
+                lineHeight: 22,
+                color: Colors.onSurfaceVariant,
+                textAlign: "center",
+                marginBottom: 24,
+              }}
+            >
+              This feature is currently being crafted with care. Stay tuned for updates.
+            </Text>
+            <GoldButton title="Dismiss" onPress={() => setShowUnderDev(false)} fullWidth />
+          </View>
+        </Pressable>
+      </Modal>
     </ScreenContainer>
   );
 }
 
 /* Bento Card */
-function BentoCard({ item }: { item: BentoItem }) {
+function BentoCard({ item, onPress }: { item: BentoItem; onPress?: () => void }) {
   return (
     <Pressable
-      style={{
+      onPress={onPress}
+      style={({ pressed }) => ({
         width: "100%",
         height: 240,
         borderRadius: 16,
         overflow: "hidden",
         borderWidth: 1,
         borderColor: "rgba(255,255,255,0.05)",
-      }}
+        opacity: pressed ? 0.9 : 1,
+      })}
     >
       <Image
         source={{ uri: item.imageUri }}
@@ -315,9 +393,9 @@ function BentoCard({ item }: { item: BentoItem }) {
 }
 
 /* Trending Card */
-function TrendingCard({ item }: { item: TrendingItem }) {
+function TrendingCard({ item, onPress }: { item: TrendingItem; onPress?: () => void }) {
   return (
-    <View style={{ width: SCROLL_CARD_WIDTH }}>
+    <Pressable onPress={onPress} style={({ pressed }) => ({ width: SCROLL_CARD_WIDTH, opacity: pressed ? 0.9 : 1 })}>
       <View
         style={{
           width: SCROLL_CARD_WIDTH,
@@ -370,6 +448,6 @@ function TrendingCard({ item }: { item: TrendingItem }) {
       >
         {item.location} • {item.category}
       </Text>
-    </View>
+    </Pressable>
   );
 }
